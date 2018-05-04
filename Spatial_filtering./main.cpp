@@ -7,9 +7,13 @@
 //
 
 #include <iostream>
+#include "matrixContainer.hpp"
+using namespace std;
+
+const string filePath = "skeleton2.png";
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    matrixContainer container(filePath); // создание контейнера.
+    container.showImage(); // вывод изображения для контроля.
     return 0;
 }
