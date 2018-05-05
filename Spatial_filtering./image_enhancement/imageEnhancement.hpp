@@ -14,12 +14,16 @@
 
 class imageEnhancement {
 public:
-    cv::Mat& laplasianing(cv::Mat& matrix);
-    cv::Mat& gradienting(cv::Mat& matrix);
-    cv::Mat& smoothing(cv::Mat& matrix);
+    imageEnhancement() {}
+    imageEnhancement(cv::Mat matrix);
+    cv::Mat& laplasianing();
+    cv::Mat& gradienting();
+    cv::Mat& smoothing();
+    void showCurrentState();
     cv::Mat& extractVorkMatrix();
 private:
-    cv::Mat vorkMatrix;
+    cv::Mat vorkMatrix, importMatrix;
+    std::string nameWindow;
 };
 
 #endif /* imageEnhancement_hpp */

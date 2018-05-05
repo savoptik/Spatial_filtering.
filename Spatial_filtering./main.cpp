@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "matrixContainer.hpp"
+#include "imageEnhancement.hpp"
 using namespace std;
 
 const string filePath = "skeleton2.png";
@@ -15,5 +16,8 @@ const string filePath = "skeleton2.png";
 int main(int argc, const char * argv[]) {
     matrixContainer container(filePath); // создание контейнера.
     container.showImage(); // вывод изображения для контроля.
+    imageEnhancement laplacian(container.extractImage());
+    laplacian.laplasianing();
+    laplacian.showCurrentState();
     return 0;
 }
