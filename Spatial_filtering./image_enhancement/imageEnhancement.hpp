@@ -14,9 +14,9 @@
 
 class imageEnhancement {
 public:
-    cv::Mat laplasianing(cv::Mat& matrix);
-    cv::Mat gradienting(cv::Mat& matrix);
-    cv::Mat smoothing(cv::Mat& matrix);
+    cv::Mat& laplasianing(cv::Mat& matrix);
+    cv::Mat& gradienting(cv::Mat& matrix);
+    cv::Mat& smoothing(cv::Mat& matrix);
     cv::Mat& extractVorkMatrix();
 private:
     cv::Mat vorkMatrix;

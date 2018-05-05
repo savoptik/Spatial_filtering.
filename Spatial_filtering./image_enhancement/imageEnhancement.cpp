@@ -13,18 +13,22 @@
 #include <opencv2/highgui.hpp>
 using namespace cv;
 
-cv::Mat imageEnhancement::laplasianing(cv::Mat &matrix) { 
-    <#code#>;
+cv::Mat& imageEnhancement::laplasianing(cv::Mat &matrix) { 
+    cvLaplace(matrix, vorkMatrix);
+    return vorkMatrix;
 }
 
-cv::Mat imageEnhancement::gradienting(cv::Mat &matrix) { 
-    <#code#>;
+cv::Mat& imageEnhancement::gradienting(cv::Mat &matrix) {
+    cvSobel(matrix, vorkMatrix, 1, 0);
+    return vorkMatrix;
 }
 
-cv::Mat imageEnhancement::smoothing(cv::Mat &matrix) { 
-    <#code#>;
+cv::Mat& imageEnhancement::smoothing(cv::Mat &matrix) {
+    ы
+    cvSmooth(matrix, vorkMatrix);
+    return vorkMatrix
 }
 
 cv::Mat &imageEnhancement::extractVorkMatrix() { 
-    <#code#>;
+    return vorkMatrix;
 }
