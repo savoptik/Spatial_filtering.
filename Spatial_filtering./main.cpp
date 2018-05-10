@@ -13,27 +13,44 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
+#include <cmath>
 using namespace cv;
 
 const std::string filePath = "skeleton2.png";
 
 int main(int argc, const char * argv[]) {
-    auto img = imread(filePath); // чтени файла.
+    auto img = imread(filePath, IMREAD_GRAYSCALE); // чтени файла.
     imshow("first", img);
     waitKey();
     Mat laplacian;
     Laplacian(img, laplacian, 3); // лапласиан.
     convertScaleAbs(laplacian, laplacian);
     auto laplacianAddIMG = laplacian + img; // наложение лапласиана на изображение.
-    namedWindow("laplacian", CV_WINDOW_AUTOSIZE);
+    imshow("laplacian", laplacianAddIMG);
+    waitKey();
     Mat grad;
-    Sobel(img, grad, 3, 1, 1);
+    Sobel(img, grad, CV_64F, 1, 1);
+    imshow("sobl", grad);
+    waitKey();
     Mat smooth;
-    medianBlur(grad, smooth, 3);
-    Mat multiplet = (laplacianAddIMG/255.0) * (smooth/255.0);
-    Mat multipleAddIMG = img/255 + multiplet;
-    Mat result = multipleAddIMG;
-    imshow("result", result);
+//    medianBlur(grad, smooth, 3);
+    blur(grad, smooth, Size(3, 3));
+    imshow("smuth", smooth);
+    waitKey();
+    Mat multiplet;
+    convertScaleAbs(smooth, smooth);
+    multiply(laplacianAddIMG, smooth, multiplet);
+    imshow("multiplet", multiplet);
+    waitKey();
+    Mat multipleAddIMG = (img/255.0 + multiplet);
+    imshow("multiplet + img", multipleAddIMG);
+    waitKey();
+           for (int i = 0; i < multipleAddIMG.rows; i++) {
+               for (int j = 0; j < multipleAddIMG.cols; j++) {
+                   multipleAddIMG.at<double>(i, j) = pow(multipleAddIMG.at<double>(i, j), 0.50);
+               }
+           }
+    imshow("result", multipleAddIMG);
     waitKey();
     destroyAllWindows();
     return 0;
